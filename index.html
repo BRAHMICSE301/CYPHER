@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#244b35">
+  <title>GrainGuard | Anaj</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-icon">🌾</span>
+      <span>GrainGuard<small>ANAAJ · GRAIN CARE</small></span>
+    </a>
+    <button id="languageBtn" class="language-btn">हिन्दी</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow" id="eyebrow">AFTER HARVEST, EVERY DAY COUNTS</p>
+      <h1 id="headline">Keep your harvest safe.</h1>
+      <p id="intro">
+        Understand local weather, check storage risks,
+        and find nearby agricultural support.
+      </p>
+      <button id="locationBtn" class="primary-btn">
+        ◎ Use My Current Location
+      </button>
+      <p id="status" class="status" role="status" aria-live="polite">
+        Your location is not being accessed.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow" id="todayLabel">LOCAL CONDITIONS</p>
+          <h2 id="todayTitle">Your area today</h2>
+        </div>
+        <span class="date-chip" id="dateLabel">Today</span>
+      </div>
+
+      <div class="location-card">
+        <span class="card-icon">⌖</span>
+        <div>
+          <p class="muted" id="areaLabel">Detected area</p>
+          <h3 id="area">Waiting for location</h3>
+          <p class="muted" id="locationNote">
+            Your coordinates are not saved.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="info-card">
+          <span class="card-icon">☁</span>
+          <p class="muted" id="weatherLabel">Current weather</p>
+          <h2 id="temperature">--°C</h2>
+          <p id="weatherText">Waiting for weather data</p>
+          <p class="muted" id="humidity">Humidity: --%</p>
+        </article>
+
+        <article class="info-card risk-card">
+          <span class="card-icon">◉</span>
+          <p class="muted" id="riskLabel">Indicative storage risk</p>
+          <h2 id="risk">Not assessed</h2>
+          <p id="riskReason">
+            Get local weather data to assess environmental risk.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section guide">
+      <p class="eyebrow" id="guideLabel">PROTECT YOUR HARVEST</p>
+      <h2 id="guideTitle">Six habits for safer grain</h2>
+      <ol id="guideList">
+        <li>Dry grain thoroughly before storage.</li>
+        <li>Clean and inspect the storage space.</li>
+        <li>Keep grain away from water and damp floors.</li>
+        <li>Use suitable, clean storage containers.</li>
+        <li>Check regularly for moisture, mould and insects.</li>
+        <li>Ask your local agricultural expert for crop-specific advice.</li>
+      </ol>
+    </section>
+
+    <footer>
+      <p>GrainGuard · Anaj</p>
+      <p id="disclaimer">
+        Prototype only. Weather-based risk is indicative,
+        not a measurement of grain moisture or a guarantee of safety.
+      </p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
