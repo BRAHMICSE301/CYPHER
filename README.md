@@ -1,133 +1,102 @@
-# GrainGaurd
+# 🌾 Team Uncharted — Smart Grain Storage Early-Warning System
 
-### *Grain storage guidance for Indian farmers*
-
-> Keep the harvest dry. Know when the weather turns against it.
-
-Anaj is a website that helps a farmer decide **where to store grain** and **how safe it is to keep it there today**. The farmer taps one button, and the site finds their area, shows nearby grain stores, reads the local weather, and explains in simple words what that weather means for stored grain.
+> **Know why your grain is at risk, before it is damaged.**  
+> An AI and weather-driven post-harvest decision support system designed for Indian farmers, godown managers, and agricultural extension officers.
 
 ---
 
-## The problem
+## 🌟 Key Features
 
-After harvest, grain is often lost to **damp, mould and insects**. Most of this is preventable, but only if the farmer knows when the risk is rising and has a trusted store within reach. Information is usually scattered across portals, helplines and word of mouth. Anaj puts the essentials on one page.
+1. **Live 5-Day Weather Analytics (Open-Meteo API)**
+   - Automatic geocoding for any Indian village, mandi, or city (Faridabad, Karnal, Ludhiana, Patna, Indore, etc.).
+   - Automatic GPS location detection button.
+   - Dual demo modes:
+     - **🌧️ Demo: Bad Day (High Rain & 86% RH)** to demonstrate crisis intervention.
+     - **☀️ Demo: Dry Week** for safe baseline comparison.
 
----
+2. **Multilingual Support (English & हिन्दी)**
+   - Instant 1-click toggle between full English and Hindi (Devanagari).
+   - All risk assessments, reasons, and actionable steps are translated with culturally relevant agricultural terms.
 
-## What the farmer sees
+3. **Domain-Specific Risk Scoring Engine (ICAR-Backed)**
+   - Evaluates sustained relative humidity ($\ge 75\%$ triggers fungal *Aspergillus* mold warnings).
+   - Correlates warm ambient temperatures ($25-35^\circ\text{C}$) with humidity for insect/weevil breeding acceleration.
+   - Calculates specific risk weights based on storage types:
+     - **Open Jute Bags** (खुली बोरियाँ) — $+2$ vulnerability penalty
+     - **Traditional Kothi** (कोठी) — $+1$ vulnerability penalty
+     - **Pakka Godown** (पक्का गोदाम) — $-1$ protection credit
+     - **Metal Bin / Silo** (धातु की टंकी) — $-2$ protection credit
+     - **Hermetic Bag / PICS** (हर्मेटिक बैग) — $-4$ maximum protection credit
+   - Tracks duration stored ($>30$ days penalty) and initial sun-drying status ($<12-14\%$ safe moisture threshold).
 
-| Section | What it gives the farmer |
-|---|---|
-| **Home** | A single button, "Use My Current Location". No typing of village, district or PIN code. |
-| **Today** | A greeting, the farmer's area, today's weather, a Low, Medium or High storage risk with reasons, and links to local agricultural support. |
-| **Storage guide** | Six plain steps from drying the grain to regular checks. |
-| **Nearby** | A map and distance-sorted list of grain stores, or agricultural support places, within 10, 25 or 50 km. |
-| **My store** | A simple record of crop, quantity, where it is kept and the date stored. |
-| **Monitor** | A technical view for judges and investors, showing how sensor readings would be checked against safe limits. |
+4. **Interactive 5-Day Forecast Visualizer & Chart**
+   - Day-by-day weather breakdown (Relative Humidity %, Average Temperature, Rain Probability %).
+   - Integrated Chart.js visualization with risk threshold markers.
 
----
+5. **"What-If" Storage Method Comparison Matrix**
+   - Real-time comparison across all 5 storage methods under the identical weather forecast.
+   - Enables farmers to visually see how switching from open jute bags to a hermetic bag or metal bin turns **HIGH RISK 🔴** into **LOW RISK 🟢**.
 
-## English and Hindi
+6. **🔊 Text-to-Speech (TTS) Voice Advisory for Farmers**
+   - Reads out the entire advisory in spoken Hindi or English at field-friendly audio pace.
+   - Bridges literacy barriers for rural agricultural communities.
 
-A switch at the top right changes the whole site between **English** and **हिन्दी** without reloading the page. The site starts in Hindi for browsers set to Hindi, and remembers the farmer's choice on their device.
+7. **Multi-Channel Advisory Sharing**
+   - **WhatsApp 1-Click Share:** Generates pre-formatted WhatsApp advisory message ready to forward to farmer groups and mandis.
+   - **Telegram Channel Alert Dispatcher:** Integrates with Telegram Bot API to send live channel notifications (with built-in offline simulator).
+   - **Printer / PDF Export:** Clean formatted print view for notice boards and physical distribution.
 
-In Hindi, the farmer's area name also appears in Hindi, for example *गुरुग्राम, हरियाणा*. The technical log for judges stays in English.
-
-The Hindi wording is written in simple everyday language, but it should be read by a native Hindi speaker before real use.
-
----
-
-## How location works
-
-1. **Nothing is requested when the page opens.** The browser's permission prompt appears only when the farmer presses the button.
-2. The site reads the position from the browser, then looks up a readable place name: *locality, city, district, state and PIN code*.
-3. The farmer sees a short result such as **Gurugram, Haryana** with the note *"Location detected automatically"*.
-4. Location can be **refreshed or changed** at any time without reloading the page.
-
-**If the farmer says no:** the site does not break. It explains in simple language that location is needed to show nearby stores, offers a "Try again" button, and keeps a manual place search as an *optional* extra.
-
-**If the place name cannot be found:** the site still keeps the coordinates, so weather and nearby search continue to work.
-
-**Demo location:** for presentations, a sample location is available. It is always labelled *"Demo Location"* with a Demo tag, and it never claims to be the farmer's real position.
-
----
-
-## Privacy
-
-- The farmer is **never tracked**. Location is read once, on request.
-- **Exact coordinates are not saved.** They stay in memory. Only a rounded, roughly 1 km cache of the place name lasts for the browser tab session.
-- The inventory is saved **on the farmer's own device only**.
-- The page tells the farmer why location is asked for, and which outside services receive approximate coordinates: *OpenStreetMap* for place names and nearby listings, and *Open-Meteo* for weather.
+8. **Kisan Helpline & Emergency Directory**
+   - Direct link to Government of India's Kisan Call Center: **1800-180-1551** (Toll-Free).
 
 ---
 
-## Honest about its data
+## 🌐 Live Demo
 
-Anaj never invents information.
-
-- **Weather** is live from Open-Meteo. If it cannot be loaded, the card is clearly marked *"Demo weather. Sample values, not live."*
-- **Nearby places** come from OpenStreetMap contributors. Coverage is thin in many villages, and the page says so instead of implying that no stores exist.
-- **Monitor screen** uses *simulated* readings and is labelled that way. No sensors are connected yet.
-- **Storage advice** is general guidance and points farmers to their local Krishi Vigyan Kendra for crop-specific advice.
+After enabling GitHub Pages (see below) the site is available at:
+`https://YOUR-USERNAME.github.io/smart-grain-storage/`
 
 ---
 
-## Design
+## 🚀 How to Run the Website
 
-The look comes from Indian farming and grain stores rather than from a software template.
+### Option 1: Double-Click (Zero Setup Required)
+Simply double-click:
+- **`start_website.bat`**  
+  *or*  
+- Directly open **`index.html`** in any modern web browser (Chrome, Edge, Firefox, Safari).
 
-- **Colours:** ivory paper background, deep forest green, grain gold, earth brown and charcoal text.
-- **Status colours** (green, amber, red) are used *only* for safety. Every status also shows a word and a dot, so it is readable without colour.
-- **Layouts differ by purpose:** an editorial home page, ruled columns for the daily view, numbered steps for the guide, a map for nearby places, large plain inputs for the inventory, and a dark technical panel for monitoring.
-- **Type:** Arial throughout, with large readable sizes and large tap targets.
-
----
-
-## Built with
-
-HTML, CSS and JavaScript. No framework, no build step and no API keys.
-
-**Free public services used:** Nominatim and Overpass (OpenStreetMap), Open-Meteo, and Leaflet for the map.
-
-### Files
-
-| File | Purpose |
-|---|---|
-| `index.html` | The page |
-| `styles.css` | The visual design |
-| `i18n.js` | All text in English and Hindi |
-| `app.js` | Location, weather, nearby search, inventory, monitor and the language switch |
-| `lib.js` | Rules and calculations, such as storage risk and distance |
-| `tests.js` | Automatic checks for `lib.js` |
-
----
-
-## Run it
-
-Location only works on `localhost` or an `https` address.
-
+### Option 2: Local Python Server
+Run the included Python server script:
 ```bash
-python3 -m http.server 8000
+python serve.py
 ```
+This will start the local HTTP server at `http://localhost:8080/index.html` and automatically launch your browser.
 
-Open **http://localhost:8000**. In a GitHub Codespace, open port 8000 from the **Ports** tab.
+---
 
-To run the checks:
+## 📂 Project Structure
 
-```bash
-node tests.js
+```text
+smart-grain-storage/
+├── index.html           # Main semantic HTML5 web application
+├── style.css            # Responsive styles, agricultural palette & print rules
+├── app.js               # Core rules engine, Open-Meteo API, TTS & state management
+├── serve.py             # Optional local HTTP web server
+├── start_website.bat    # Windows 1-click launcher
+├── README.md            # Documentation & project guide
+├── .nojekyll            # Tells GitHub Pages to serve files as-is
+└── .gitignore           # Files Git should ignore
 ```
 
 ---
 
-## Where it goes next
-
-- Verified storage listings from warehousing corporations and cooperatives.
-- Real sensor readings in the monitor.
-- A small backend service for place names and nearby search, for heavy use.
-- Hindi and regional language versions.
-- Crop-specific advice reviewed by agronomists.
+## ⚠️ Telegram Token Safety
+This is a client-side website, so any bot token typed into the Telegram dialog is only held in the browser and sent directly to Telegram. **Never hard-code a bot token in `app.js` or commit it to GitHub.** Leave the fields blank to use the built-in simulator.
 
 ---
 
-*Anaj is a hackathon prototype. Its guidance is general and does not replace advice from the local agriculture office.*
+## 🔬 Scientific & Technical References
+- **ICAR (Indian Council of Agricultural Research):** Post-harvest grain storage moisture guidelines.
+- **FAO (Food and Agriculture Organization):** Hermetic storage systems for smallholder farmers.
+- **Open-Meteo:** Open-access high-resolution meteorological forecasts.
