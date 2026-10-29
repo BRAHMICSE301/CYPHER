@@ -4,97 +4,225 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#244b35">
-  <title>GrainGuard | Anaj</title>
+  <meta name="theme-color" content="#f8f6ed">
+  <title>GrainGuard | Anaj - Grain Care</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <header class="topbar">
-    <a class="brand" href="#">
-      <span class="brand-icon">🌾</span>
-      <span>GrainGuard<small>ANAAJ · GRAIN CARE</small></span>
+    <a class="brand" href="#" aria-label="GrainGuard home">
+      <span class="brand-mark">🌾</span>
+      <span class="brand-copy">
+        GrainGuard
+        <small>ANAAJ · GRAIN CARE</small>
+      </span>
     </a>
     <button id="languageBtn" class="language-btn">हिन्दी</button>
   </header>
 
   <main>
     <section class="hero">
-      <p class="eyebrow" id="eyebrow">AFTER HARVEST, EVERY DAY COUNTS</p>
-      <h1 id="headline">Keep your harvest safe.</h1>
-      <p id="intro">
-        Understand local weather, check storage risks,
-        and find nearby agricultural support.
-      </p>
-      <button id="locationBtn" class="primary-btn">
-        ◎ Use My Current Location
-      </button>
-      <p id="status" class="status" role="status" aria-live="polite">
-        Your location is not being accessed.
-      </p>
+      <div class="hero-content">
+        <p class="eyebrow" id="eyebrow">
+          AFTER HARVEST, EVERY DAY COUNTS
+        </p>
+
+        <h1 id="headline">Keep your harvest safe.</h1>
+
+        <p class="hero-description" id="intro">
+          Understand local weather, check storage risks,
+          and find nearby agricultural support.
+        </p>
+
+        <button id="locationBtn" class="primary-btn">
+          <span aria-hidden="true">⌖</span>
+          Use My Current Location
+        </button>
+
+        <p id="status" class="status" role="status" aria-live="polite">
+          Your location is not being accessed.
+        </p>
+      </div>
+
+      <div class="hero-decoration" aria-hidden="true">
+        <span>🌾</span>
+      </div>
     </section>
 
-    <section class="section">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow" id="todayLabel">LOCAL CONDITIONS</p>
-          <h2 id="todayTitle">Your area today</h2>
+    <section class="dashboard">
+      <div class="dashboard-main">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" id="todayLabel">LOCAL CONDITIONS</p>
+            <h2 id="todayTitle">Your area today</h2>
+          </div>
+          <span class="date-chip">
+            <span aria-hidden="true">▦</span>
+            <span id="dateLabel">Today</span>
+          </span>
         </div>
-        <span class="date-chip" id="dateLabel">Today</span>
-      </div>
 
-      <div class="location-card">
-        <span class="card-icon">⌖</span>
-        <div>
-          <p class="muted" id="areaLabel">Detected area</p>
-          <h3 id="area">Waiting for location</h3>
-          <p class="muted" id="locationNote">
-            Your coordinates are not saved.
-          </p>
+        <div class="weather-grid">
+
+          <article class="info-card location-card">
+            <div class="card-icon green-icon" aria-hidden="true">⌖</div>
+            <div class="card-content">
+              <p class="card-label" id="areaLabel">Detected area</p>
+              <h3 id="area">Waiting for location</h3>
+              <p class="card-note" id="locationNote">
+                Your coordinates are not saved.
+              </p>
+              <button class="text-btn" id="retryLocation">
+                ↻ Change location
+              </button>
+            </div>
+          </article>
+
+          <article class="info-card weather-card">
+            <div class="card-icon blue-icon" aria-hidden="true">☁</div>
+            <div class="card-content">
+              <div class="card-label-row">
+                <p class="card-label" id="weatherLabel">Current weather</p>
+                <span class="live-badge">● Live</span>
+              </div>
+              <h3 class="temperature" id="temperature">--°C</h3>
+              <p id="weatherText">Waiting for weather data</p>
+              <p class="humidity-line" id="humidity">Humidity: --%</p>
+            </div>
+          </article>
+
+          <article class="info-card risk-card">
+            <div class="card-icon gold-icon" aria-hidden="true">♢</div>
+            <div class="card-content">
+              <p class="card-label" id="riskLabel">
+                Indicative storage risk
+              </p>
+              <h3 id="risk">Not assessed</h3>
+              <p id="riskReason">
+                Get local weather data to assess environmental risk.
+              </p>
+              <a class="text-link" href="#guide">
+                View storage advice <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+
         </div>
       </div>
 
-      <div class="grid">
-        <article class="info-card">
-          <span class="card-icon">☁</span>
-          <p class="muted" id="weatherLabel">Current weather</p>
-          <h2 id="temperature">--°C</h2>
-          <p id="weatherText">Waiting for weather data</p>
-          <p class="muted" id="humidity">Humidity: --%</p>
-        </article>
+      <aside class="quick-access">
+        <h3>Quick Access <span aria-hidden="true">›</span></h3>
 
-        <article class="info-card risk-card">
-          <span class="card-icon">◉</span>
-          <p class="muted" id="riskLabel">Indicative storage risk</p>
-          <h2 id="risk">Not assessed</h2>
-          <p id="riskReason">
-            Get local weather data to assess environmental risk.
-          </p>
-        </article>
+        <a class="quick-item" href="#guide">
+          <span class="quick-icon">🌱</span>
+          <span class="quick-copy">
+            <strong>Storage Guide</strong>
+            <small>6 simple steps</small>
+          </span>
+          <span class="quick-arrow">›</span>
+        </a>
+
+        <a class="quick-item" href="#nearby">
+          <span class="quick-icon">⌖</span>
+          <span class="quick-copy">
+            <strong>Nearby Support</strong>
+            <small>Find agricultural help</small>
+          </span>
+          <span class="quick-arrow">›</span>
+        </a>
+
+        <a class="quick-item" href="#my-store">
+          <span class="quick-icon">▣</span>
+          <span class="quick-copy">
+            <strong>My Store</strong>
+            <small>Your inventory details</small>
+          </span>
+          <span class="quick-arrow">›</span>
+        </a>
+
+        <a class="quick-item" href="#monitor">
+          <span class="quick-icon">↗</span>
+          <span class="quick-copy">
+            <strong>Monitor</strong>
+            <small>Simulated sensor data</small>
+          </span>
+          <span class="quick-arrow">›</span>
+        </a>
+      </aside>
+
+      <section class="guide-panel" id="guide">
+        <div class="guide-heading">
+          <span class="guide-illustration" aria-hidden="true">🌾</span>
+          <div>
+            <p class="eyebrow" id="guideLabel">PROTECT YOUR HARVEST</p>
+            <h2 id="guideTitle">Six habits for safer grain</h2>
+          </div>
+        </div>
+
+        <ol id="guideList" class="guide-list">
+          <li>Dry grain thoroughly before storage.</li>
+          <li>Clean and inspect the storage space.</li>
+          <li>Keep grain away from water and damp floors.</li>
+          <li>Use suitable, clean storage containers.</li>
+          <li>Check regularly for moisture, mould and insects.</li>
+          <li>Ask your local agricultural expert for crop-specific advice.</li>
+        </ol>
+      </section>
+    </section>
+
+    <section class="extra-section" id="nearby">
+      <span class="extra-icon">📍</span>
+      <div>
+        <p class="eyebrow">LOCAL AGRICULTURAL SUPPORT</p>
+        <h2>Find help closer to home.</h2>
+        <p>Use your detected location to explore nearby agricultural support.
+        Availability depends on local map data.</p>
+      </div>
+      <button class="outline-btn" id="nearbyBtn">Use my location</button>
+    </section>
+
+    <section class="extra-section store-section" id="my-store">
+      <span class="extra-icon">🌾</span>
+      <div>
+        <p class="eyebrow">YOUR HARVEST RECORD</p>
+        <h2>My grain store</h2>
+        <p>Inventory tracking is coming next. Your storage records
+        will be added after the database integration.</p>
       </div>
     </section>
 
-    <section class="section guide">
-      <p class="eyebrow" id="guideLabel">PROTECT YOUR HARVEST</p>
-      <h2 id="guideTitle">Six habits for safer grain</h2>
-      <ol id="guideList">
-        <li>Dry grain thoroughly before storage.</li>
-        <li>Clean and inspect the storage space.</li>
-        <li>Keep grain away from water and damp floors.</li>
-        <li>Use suitable, clean storage containers.</li>
-        <li>Check regularly for moisture, mould and insects.</li>
-        <li>Ask your local agricultural expert for crop-specific advice.</li>
-      </ol>
+    <section class="extra-section monitor-section" id="monitor">
+      <span class="extra-icon">⌁</span>
+      <div>
+        <p class="eyebrow">PROTOTYPE MONITOR</p>
+        <h2>Storage monitoring</h2>
+        <p>No physical sensors are connected yet. Live weather
+        data is separate from simulated sensor readings.</p>
+      </div>
+      <span class="demo-badge">DEMO</span>
     </section>
 
-    <footer>
-      <p>GrainGuard · Anaj</p>
+    <footer class="footer">
+      <a class="footer-brand" href="#">🌾 GrainGuard · Anaj</a>
       <p id="disclaimer">
-        Prototype only. Weather-based risk is indicative,
-        not a measurement of grain moisture or a guarantee of safety.
+        Prototype only. Weather-based risk is indicative, not a
+        measurement of grain moisture or a guarantee of safety.
       </p>
     </footer>
   </main>
 
   <script src="app.js"></script>
+  <script>
+    document.getElementById("retryLocation").addEventListener(
+      "click",
+      () => document.getElementById("locationBtn").click()
+    );
+
+    document.getElementById("nearbyBtn").addEventListener(
+      "click",
+      () => document.getElementById("locationBtn").click()
+    );
+  </script>
 </body>
 </html>
