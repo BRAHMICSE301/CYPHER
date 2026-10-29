@@ -1,228 +1,383 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f8f6ed">
-  <title>GrainGuard | Anaj - Grain Care</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Team Uncharted - Smart Grain Storage Early-Warning</title>
+  <meta name="description" content="AI-assisted smart grain storage early warning system to protect crops from moisture, fungus, and spoilage before damage occurs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8C%BE%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="GrainGuard home">
-      <span class="brand-mark">🌾</span>
-     <span class="brand-copy">
-  GrainGuard
-  <small>GRAINGUARD · SMART GRAIN CARE</small>
-</span>
-    </a>
-    <button id="languageBtn" class="language-btn">हिन्दी</button>
+  <!-- Header Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <span class="brand-icon">&#x1F33E;</span>
+        <div class="brand-text">
+          <h1>Team Uncharted</h1>
+          <p id="navTagline">Smart Grain Storage Early-Warning</p>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <!-- Language Switcher -->
+        <div class="lang-selector">
+          <label for="langSwitch" class="sr-only">Language</label>
+          <button id="langBtnEn" class="lang-btn active" onclick="setLanguage('en')">English</button>
+          <button id="langBtnHi" class="lang-btn" onclick="setLanguage('hi')">&#x0939;&#x093f;&#x0928;&#x094d;&#x0926;&#x0940;</button>
+        </div>
+        <!-- Quick Help / KVK Helpline -->
+        <a href="#helpline" class="btn-secondary helpline-link" title="Kisan Call Center: 1800-180-1551">
+          &#x1F4DE; <span id="helpText">Kisan Helpline</span>
+        </a>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <p class="eyebrow" id="eyebrow">
-          AFTER HARVEST, EVERY DAY COUNTS
-        </p>
-
-        <h1 id="headline">Keep your harvest safe.</h1>
-
-        <p class="hero-description" id="intro">
-          Understand local weather, check storage risks,
-          and find nearby agricultural support.
-        </p>
-
-        <button id="locationBtn" class="primary-btn">
-          <span aria-hidden="true">⌖</span>
-          Use My Current Location
-        </button>
-
-        <p id="status" class="status" role="status" aria-live="polite">
-          Your location is not being accessed.
-        </p>
-      </div>
-
-      <div class="hero-decoration" aria-hidden="true">
-        <span>🌾</span>
-      </div>
-    </section>
-
-    <section class="dashboard">
-      <div class="dashboard-main">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow" id="todayLabel">LOCAL CONDITIONS</p>
-            <h2 id="todayTitle">Your area today</h2>
-          </div>
-          <span class="date-chip">
-            <span aria-hidden="true">▦</span>
-            <span id="dateLabel">Today</span>
-          </span>
-        </div>
-
-        <div class="weather-grid">
-
-          <article class="info-card location-card">
-            <div class="card-icon green-icon" aria-hidden="true">⌖</div>
-            <div class="card-content">
-              <p class="card-label" id="areaLabel">Detected area</p>
-              <h3 id="area">Waiting for location</h3>
-              <p class="card-note" id="locationNote">
-                Your coordinates are not saved.
-              </p>
-              <button class="text-btn" id="retryLocation">
-                ↻ Change location
-              </button>
-            </div>
-          </article>
-
-          <article class="info-card weather-card">
-            <div class="card-icon blue-icon" aria-hidden="true">☁</div>
-            <div class="card-content">
-              <div class="card-label-row">
-                <p class="card-label" id="weatherLabel">Current weather</p>
-                <span class="live-badge">● Live</span>
-              </div>
-              <h3 class="temperature" id="temperature">--°C</h3>
-              <p id="weatherText">Waiting for weather data</p>
-              <p class="humidity-line" id="humidity">Humidity: --%</p>
-            </div>
-          </article>
-
-          <article class="info-card risk-card">
-            <div class="card-icon gold-icon" aria-hidden="true">♢</div>
-            <div class="card-content">
-              <p class="card-label" id="riskLabel">
-                Indicative storage risk
-              </p>
-              <h3 id="risk">Not assessed</h3>
-              <p id="riskReason">
-                Get local weather data to assess environmental risk.
-              </p>
-              <a class="text-link" href="#guide">
-                View storage advice <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </article>
-
-        </div>
-      </div>
-
-      <aside class="quick-access">
-        <h3>Quick Access <span aria-hidden="true">›</span></h3>
-
-        <a class="quick-item" href="#guide">
-          <span class="quick-icon">🌱</span>
-          <span class="quick-copy">
-            <strong>Storage Guide</strong>
-            <small>6 simple steps</small>
-          </span>
-          <span class="quick-arrow">›</span>
-        </a>
-
-        <a class="quick-item" href="#nearby">
-          <span class="quick-icon">⌖</span>
-          <span class="quick-copy">
-            <strong>Nearby Support</strong>
-            <small>Find agricultural help</small>
-          </span>
-          <span class="quick-arrow">›</span>
-        </a>
-
-        <a class="quick-item" href="#my-store">
-          <span class="quick-icon">▣</span>
-          <span class="quick-copy">
-            <strong>My Store</strong>
-            <small>Your inventory details</small>
-          </span>
-          <span class="quick-arrow">›</span>
-        </a>
-
-        <a class="quick-item" href="#monitor">
-          <span class="quick-icon">↗</span>
-          <span class="quick-copy">
-            <strong>Monitor</strong>
-            <small>Simulated sensor data</small>
-          </span>
-          <span class="quick-arrow">›</span>
-        </a>
-      </aside>
-
-      <section class="guide-panel" id="guide">
-        <div class="guide-heading">
-          <span class="guide-illustration" aria-hidden="true">🌾</span>
-          <div>
-            <p class="eyebrow" id="guideLabel">PROTECT YOUR HARVEST</p>
-            <h2 id="guideTitle">Six habits for safer grain</h2>
-          </div>
-        </div>
-
-        <ol id="guideList" class="guide-list">
-          <li>Dry grain thoroughly before storage.</li>
-          <li>Clean and inspect the storage space.</li>
-          <li>Keep grain away from water and damp floors.</li>
-          <li>Use suitable, clean storage containers.</li>
-          <li>Check regularly for moisture, mould and insects.</li>
-          <li>Ask your local agricultural expert for crop-specific advice.</li>
-        </ol>
-      </section>
-    </section>
-
-    <section class="extra-section" id="nearby">
-      <span class="extra-icon">📍</span>
-      <div>
-        <p class="eyebrow">LOCAL AGRICULTURAL SUPPORT</p>
-        <h2>Find help closer to home.</h2>
-        <p>Use your detected location to explore nearby agricultural support.
-        Availability depends on local map data.</p>
-      </div>
-      <button class="outline-btn" id="nearbyBtn">Use my location</button>
-    </section>
-
-    <section class="extra-section store-section" id="my-store">
-      <span class="extra-icon">🌾</span>
-      <div>
-        <p class="eyebrow">YOUR HARVEST RECORD</p>
-        <h2>My grain store</h2>
-        <p>Inventory tracking is coming next. Your storage records
-        will be added after the database integration.</p>
-      </div>
-    </section>
-
-    <section class="extra-section monitor-section" id="monitor">
-      <span class="extra-icon">⌁</span>
-      <div>
-        <p class="eyebrow">PROTOTYPE MONITOR</p>
-        <h2>Storage monitoring</h2>
-        <p>No physical sensors are connected yet. Live weather
-        data is separate from simulated sensor readings.</p>
-      </div>
-      <span class="demo-badge">DEMO</span>
-    </section>
-
-    <footer class="footer">
-      <a class="footer-brand" href="#">🌾 GrainGuard · Anaj</a>
-      <p id="disclaimer">
-        Prototype only. Weather-based risk is indicative, not a
-        measurement of grain moisture or a guarantee of safety.
+  <!-- Hero & Status Banner -->
+  <section class="hero-banner">
+    <div class="container hero-content">
+      <div class="hero-badge" id="heroBadge">&#x1F331; Post-Harvest Crop Protection</div>
+      <h2 id="mainTitle">Smart Grain Storage Early-Warning System</h2>
+      <p id="mainTagline" class="hero-subtitle">
+        Know why your grain is at risk, before it is damaged. Real-time weather risk analytics and actionable post-harvest advisories for farmers.
       </p>
-    </footer>
+    </div>
+  </section>
+
+  <!-- Main Dashboard Grid -->
+  <main class="container main-dashboard">
+    <!-- Left Column: Input Form & Parameters -->
+    <div class="card form-card">
+      <div class="card-header">
+        <h3 id="formTitle">&#x2699;&#xFE0F; Storage & Weather Parameters</h3>
+        <span class="badge badge-info" id="paramsBadge">Step 1 of 2</span>
+      </div>
+
+      <form id="assessmentForm" onsubmit="handleFormSubmit(event)">
+        <!-- Location / City -->
+        <div class="form-group">
+          <label for="cityInput" id="labelCity">Village or City</label>
+          <div class="input-with-button">
+            <input type="text" id="cityInput" value="Faridabad" placeholder="e.g. Faridabad, Karnal, Ludhiana, Patna" required>
+            <button type="button" id="geoBtn" class="btn-geo" onclick="detectUserLocation()" title="Use Current GPS Location">&#x1F4CD; GPS</button>
+          </div>
+          <!-- Quick Indian Agri-Hub Chips -->
+          <div class="quick-cities" id="quickCities">
+            <span class="quick-chip-label" id="chipLabel">Popular:</span>
+            <button type="button" class="chip" onclick="setCity('Faridabad')">Faridabad</button>
+            <button type="button" class="chip" onclick="setCity('Karnal')">Karnal</button>
+            <button type="button" class="chip" onclick="setCity('Ludhiana')">Ludhiana</button>
+            <button type="button" class="chip" onclick="setCity('Patna')">Patna</button>
+            <button type="button" class="chip" onclick="setCity('Indore')">Indore</button>
+          </div>
+        </div>
+
+        <!-- Weather Source Mode -->
+        <div class="form-group">
+          <label id="labelSource">Weather Data Source</label>
+          <div class="source-toggle">
+            <label class="radio-label">
+              <input type="radio" name="source" value="live" checked onchange="updateWeatherSource(this.value)">
+              <span class="radio-custom"></span>
+              <span id="srcLive">&#x1F6F0;&#xFE0F; Live Forecast (Open-Meteo)</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="source" value="rain" onchange="updateWeatherSource(this.value)">
+              <span class="radio-custom"></span>
+              <span id="srcRain">&#x1F327;&#xFE0F; Demo: Bad Day (High Rain)</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="source" value="dry" onchange="updateWeatherSource(this.value)">
+              <span class="radio-custom"></span>
+              <span id="srcDry">&#x2600;&#xFE0F; Demo: Dry Safe Week</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Two Column Grid for Grain & Storage -->
+        <div class="form-row">
+          <!-- Grain Selection -->
+          <div class="form-group">
+            <label for="grainSelect" id="labelGrain">Grain Type</label>
+            <select id="grainSelect" class="form-control">
+              <option value="wheat">&#x1F33E; Wheat (&#x0917;&#x0947;&#x0939;&#x0942;&#x0901;)</option>
+              <option value="rice">&#x1F35A; Rice / Paddy (&#x091a;&#x093e;&#x0935;&#x0932; / &#x0927;&#x093e;&#x0928;)</option>
+              <option value="maize">&#x1F33D; Maize / Corn (&#x092e;&#x0915;&#x094d;&#x0915;&#x093e;)</option>
+              <option value="pulses">&#x1FAD8; Pulses / Gram (&#x091a;&#x0928;&#x093e; / &#x0926;&#x093e;&#x0932;&#x0947;&#x0902;)</option>
+            </select>
+          </div>
+
+          <!-- Storage Method -->
+          <div class="form-group">
+            <label for="storageSelect" id="labelStorage">How is it stored?</label>
+            <select id="storageSelect" class="form-control" onchange="triggerRecalculate()">
+              <option value="open_bag">&#x1F4E6; Open jute bags (&#x0916;&#x0941;&#x0932;&#x0940; &#x092c;&#x094b;&#x0930;&#x093f;&#x092f;&#x093e;&#x0901;) - High Vulnerability</option>
+              <option value="kothi">&#x1F6D6; Traditional Kothi (&#x0915;&#x094b;&#x0920;&#x0940;) - Partial Protection</option>
+              <option value="pakka_godown">&#x1F3EC; Pakka godown (&#x092a;&#x0915;&#x094d;&#x0915;&#x093e; &#x0917;&#x094b;&#x0926;&#x093e;&#x092e;) - Good</option>
+              <option value="metal_bin">&#x1F6E2;&#xFE0F; Metal bin / Silo (&#x0927;&#x093e;&#x0924;&#x0941; &#x0915;&#x0940; &#x091f;&#x0902;&#x0915;&#x0940;) - Very Safe</option>
+              <option value="hermetic">&#x1F6E1;&#xFE0F; Hermetic bag (&#x0939;&#x0930;&#x094d;&#x092e;&#x0947;&#x091f;&#x093f;&#x0915; &#x092c;&#x0948;&#x0917;) - Maximum Protection</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Two Column Grid for Days & Sun-Dried -->
+        <div class="form-row align-center">
+          <!-- Days Stored -->
+          <div class="form-group">
+            <label for="daysInput" id="labelDays">Days stored so far</label>
+            <div class="range-container">
+              <input type="number" id="daysInput" min="0" max="365" value="10" class="form-control" oninput="syncRange(this.value)">
+              <input type="range" id="daysRange" min="0" max="180" value="10" oninput="syncNumber(this.value)">
+            </div>
+            <small class="field-help" id="daysHelp">Storage over 30 days increases vulnerability.</small>
+          </div>
+
+          <!-- Sun-Dried Toggle -->
+          <div class="form-group">
+            <label id="labelDried">Sun-dried before storing?</label>
+            <div class="toggle-card">
+              <label class="switch">
+                <input type="checkbox" id="driedCheckbox" checked onchange="triggerRecalculate()">
+                <span class="slider round"></span>
+              </label>
+              <div class="toggle-text">
+                <strong id="driedStatusText">Yes (Well Sun-Dried)</strong>
+                <small id="driedHelp">Grain moisture below 12-14%.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+          <button type="submit" id="checkBtn" class="btn-primary btn-large">
+            <span class="btn-icon">&#x1F50D;</span>
+            <span id="btnCheckText">Check My Grain Storage</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Column: Results & Advisory Card -->
+    <div class="card results-card" id="resultsSection">
+      <div class="card-header">
+        <h3 id="resultsTitle">&#x1F4CA; Storage Risk Assessment</h3>
+        <div class="header-badges">
+          <span id="liveStatusBadge" class="badge badge-success">Live Analysis</span>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loadingIndicator" class="loading-state hidden">
+        <div class="spinner"></div>
+        <p id="loadingText">Fetching weather forecast & analyzing storage risks...</p>
+      </div>
+
+      <!-- Results Body -->
+      <div id="resultsContent" class="results-content">
+        <!-- Risk Level Alert Banner -->
+        <div id="riskBanner" class="risk-banner risk-low">
+          <div class="risk-icon-wrapper" id="riskIcon">&#x1F6E1;&#xFE0F;</div>
+          <div class="risk-info">
+            <div class="risk-level-tag" id="riskLevelTag">LOW RISK</div>
+            <h4 id="riskHeadline" class="risk-headline">Low Risk - Grain Is Protected</h4>
+            <p id="riskPeakDate" class="risk-peak">Forecast looks safe for the upcoming 5 days.</p>
+          </div>
+          <div class="risk-meter-score">
+            <div class="score-circle">
+              <span id="scoreValue">0</span>
+              <small>/ 10</small>
+            </div>
+            <span class="score-label" id="scoreLabel">Risk Index</span>
+          </div>
+        </div>
+
+        <!-- Text-to-Speech Audio Readout for Farmers -->
+        <div class="tts-container">
+          <button type="button" id="ttsBtn" class="btn-tts" onclick="playAudioAdvisory()">
+            &#x1F50A; <span id="ttsBtnText">Listen Advisory in English</span>
+          </button>
+          <span class="tts-note" id="ttsNote">Designed for farmers in field</span>
+        </div>
+
+        <!-- Section: Why is your grain at risk? -->
+        <div class="advisory-section">
+          <div class="section-title-wrapper">
+            <h4 id="titleWhy">&#x26A0;&#xFE0F; Why your grain is at risk (Risk Factors)</h4>
+          </div>
+          <ul id="whyList" class="styled-list danger-list">
+            <li>No major risks identified. Conditions are safe.</li>
+          </ul>
+        </div>
+
+        <!-- Section: What to do (Actionable Steps) -->
+        <div class="advisory-section">
+          <div class="section-title-wrapper">
+            <h4 id="titleDo">&#x2705; What to do (Recommended Action Checklist)</h4>
+          </div>
+          <ul id="actionsList" class="styled-list action-list">
+            <li><label><input type="checkbox"> No immediate action required. Keep checking forecast.</label></li>
+          </ul>
+        </div>
+
+        <!-- Share & Export Actions -->
+        <div class="result-actions">
+          <button type="button" class="btn-share whatsapp" onclick="shareOnWhatsApp()">
+            &#x1F4AC; <span id="shareWhatsapp">Share to WhatsApp</span>
+          </button>
+          <button type="button" class="btn-share telegram" onclick="openTelegramModal()">
+            &#x2708;&#xFE0F; <span id="shareTelegram">Send to Telegram</span>
+          </button>
+          <button type="button" class="btn-share print" onclick="window.print()">
+            &#x1F5A8;&#xFE0F; <span id="printAdvisory">Print Advisory</span>
+          </button>
+        </div>
+
+        <!-- Research Note -->
+        <div class="disclaimer-note">
+          <span class="info-icon">&#x2139;&#xFE0F;</span>
+          <p id="noteText">
+            This advisory is based on exterior atmospheric weather forecast & verified post-harvest storage research rules. It does not cover rodent infestation. Consult your nearest Krishi Vigyan Kendra (KVK) for laboratory moisture testing.
+          </p>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <script src="app.js"></script>
-  <script>
-    document.getElementById("retryLocation").addEventListener(
-      "click",
-      () => document.getElementById("locationBtn").click()
-    );
+  <!-- Middle Section: 5-Day Weather Forecast & Interactive Chart -->
+  <section class="container section-forecast">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3 id="forecastHeader">&#x1F324;&#xFE0F; Next 5 Days Weather & Moisture Exposure</h3>
+          <p class="subtitle" id="forecastSub">Hourly aggregated forecast for humidity, ambient temperature, and precipitation chance.</p>
+        </div>
+        <div class="location-tag">
+          &#x1F4CD; <span id="forecastLocation">Faridabad, India</span>
+        </div>
+      </div>
 
-    document.getElementById("nearbyBtn").addEventListener(
-      "click",
-      () => document.getElementById("locationBtn").click()
-    );
-  </script>
+      <!-- 5-Day Grid Cards -->
+      <div class="forecast-cards" id="forecastCardsContainer">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+
+      <!-- Chart View -->
+      <div class="chart-container">
+        <canvas id="weatherChart" height="110"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Section: "What If" Storage Comparison Matrix -->
+  <section class="container section-whatif">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h3 id="whatIfHeader">&#x1F504; What if you changed the storage method?</h3>
+          <p class="subtitle" id="whatIfSub">Compare the risk level across all 5 common storage types under current forecasted conditions.</p>
+        </div>
+        <span class="badge badge-success" id="roiBadge">Upgrade Decision Tool</span>
+      </div>
+
+      <div class="whatif-grid" id="whatIfGrid">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Knowledge Base & Best Practices -->
+  <section class="container section-knowledge" id="guide">
+    <div class="card">
+      <div class="card-header">
+        <h3 id="guideHeader">&#x1F4DA; Grain Storage Best Practices & Standards</h3>
+      </div>
+      <div class="knowledge-grid">
+        <div class="knowledge-card">
+          <div class="icon">&#x2600;&#xFE0F;</div>
+          <h4 id="guideTitle1">Safe Moisture Level</h4>
+          <p id="guideDesc1">Always dry wheat to under 12% moisture and paddy/rice to under 13% before bagging. Grain with >14% moisture heats up and invites fungal Aspergillus growth.</p>
+        </div>
+        <div class="knowledge-card">
+          <div class="icon">&#x1FAB5;</div>
+          <h4 id="guideTitle2">Dunnage (Keep Off Floor)</h4>
+          <p id="guideDesc2">Never stack bags directly on damp soil or concrete floor. Place wooden pallets or bamboo mats at least 15cm (6 inches) above the ground.</p>
+        </div>
+        <div class="knowledge-card">
+          <div class="icon">&#x1F6E1;&#xFE0F;</div>
+          <h4 id="guideTitle3">Hermetic Packaging</h4>
+          <p id="guideDesc3">Airtight multi-layer hermetic bags (PICS bags) suffocate insects naturally by depleting oxygen without needing harmful chemical fumigants.</p>
+        </div>
+        <div class="knowledge-card">
+          <div class="icon">&#x1F50D;</div>
+          <h4 id="guideTitle4">Early Warning Clues</h4>
+          <p id="guideDesc4">Check grain twice weekly. Clumping, warm grain pockets, or musty damp odors indicate moisture migration and immediate remediation needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Support & KVK Directory -->
+  <section class="container section-helpline" id="helpline">
+    <div class="helpline-card">
+      <div class="helpline-left">
+        <span class="helpline-icon">&#x1F4DE;</span>
+        <div>
+          <h3 id="helpCardTitle">Need Immediate Farm Expert Help?</h3>
+          <p id="helpCardSub">Contact Government of India's Kisan Call Center or your local Krishi Vigyan Kendra (KVK).</p>
+        </div>
+      </div>
+      <div class="helpline-actions">
+        <a href="tel:18001801551" class="helpline-btn">
+          &#x1F4DE; 1800-180-1551 (Toll-Free, 6 AM - 10 PM)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Telegram Modal -->
+  <div id="telegramModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="tgModalTitle">&#x2708;&#xFE0F; Telegram Alert Dispatcher</h4>
+        <button type="button" class="close-btn" onclick="closeTelegramModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="tgModalDesc">You can dispatch this advisory straight to your farmer Telegram channel or bot.</p>
+        <div class="form-group">
+          <label>Bot Token</label>
+          <input type="text" id="tgTokenInput" placeholder="Enter Bot Token (or leave blank to test simulator)">
+        </div>
+        <div class="form-group">
+          <label>Chat ID</label>
+          <input type="text" id="tgChatInput" placeholder="Enter Chat ID / Channel ID">
+        </div>
+        <div class="preview-box">
+          <label>Message Preview:</label>
+          <pre id="tgMessagePreview"></pre>
+        </div>
+        <div id="tgStatusMessage" class="tg-status hidden"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeTelegramModal()">Cancel</button>
+        <button type="button" class="btn-primary" onclick="sendTelegramAlert()">Send Alert</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 <strong>Team Uncharted</strong> &bull; Smart Grain Storage Early-Warning System.</p>
+      <p class="footer-sub">Rules & algorithms derived from Indian Council of Agricultural Research (ICAR) & Open-Meteo Weather Services.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
