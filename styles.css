@@ -2159,3 +2159,318 @@ section {
     transform: none;
   }
 }
+
+
+
+/* ========================================================
+   GRAINGUARD — STABILITY & RESPONSIVE FIXES
+   Append at the bottom of style.css
+   ======================================================== */
+
+/* Prevent horizontal overflow */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+}
+
+/* Keep page content centered */
+.container {
+  width: min(100% - 2rem, 1200px);
+}
+
+/* Improve navbar spacing */
+.nav-container {
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.brand {
+  min-width: 0;
+}
+
+.brand-text h1,
+.brand-text p {
+  overflow-wrap: anywhere;
+}
+
+/* More consistent card appearance */
+.card,
+.fc-card,
+.whatif-card,
+.knowledge-card,
+.helpline-card {
+  overflow-wrap: anywhere;
+}
+
+.card {
+  min-width: 0;
+}
+
+.main-dashboard > * {
+  min-width: 0;
+}
+
+/* Keep form controls inside their containers */
+.form-group,
+.form-row,
+.input-with-button,
+.range-container {
+  min-width: 0;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+.form-control,
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.input-with-button input {
+  flex: 1;
+  width: 100%;
+}
+
+/* Separate custom toggle from other slider elements */
+.switch {
+  cursor: pointer;
+}
+
+.switch .slider {
+  border-radius: 34px;
+}
+
+.switch .slider::before {
+  border-radius: 50%;
+}
+
+/* Clear keyboard focus */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+/* Prevent long text from breaking result cards */
+.risk-banner {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.risk-info {
+  min-width: 0;
+}
+
+.risk-headline {
+  overflow-wrap: anywhere;
+}
+
+.score-circle {
+  flex-shrink: 0;
+}
+
+/* Consistent hover effects */
+.card,
+.knowledge-card,
+.whatif-card {
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.knowledge-card:hover {
+  border-color: #bbf7d0;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Make interactive elements easier to use */
+button,
+.btn-primary,
+.btn-share,
+.btn-geo,
+.btn-tts,
+.chip,
+.helpline-btn {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Tablet and mobile */
+@media (max-width: 768px) {
+  .container {
+    width: min(100% - 1.25rem, 1200px);
+    padding-inline: 0.25rem;
+  }
+
+  .nav-container {
+    padding: 0.75rem;
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  .hero-banner {
+    padding: 2rem 0 2.5rem;
+  }
+
+  .hero-content h2 {
+    font-size: clamp(1.55rem, 5vw, 2rem);
+  }
+
+  .hero-subtitle {
+    padding-inline: 0.75rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .forecast-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .whatif-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .helpline-card {
+    padding: 1.25rem;
+  }
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .brand-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1.6rem;
+  }
+
+  .brand-text h1 {
+    font-size: 1rem;
+  }
+
+  .brand-text p {
+    font-size: 0.68rem;
+  }
+
+  .nav-container {
+    align-items: flex-start;
+  }
+
+  .nav-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .helpline-link {
+    font-size: 0.75rem;
+  }
+
+  .form-row,
+  .forecast-cards,
+  .whatif-grid,
+  .knowledge-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .input-with-button {
+    flex-wrap: wrap;
+  }
+
+  .btn-geo {
+    min-height: 42px;
+  }
+
+  .risk-banner {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .risk-icon-wrapper {
+    font-size: 2rem;
+  }
+
+  .risk-headline {
+    font-size: 1rem;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .btn-share {
+    width: 100%;
+  }
+
+  .helpline-left {
+    align-items: flex-start;
+  }
+
+  .helpline-btn {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print cleanup */
+@media print {
+  body {
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .card,
+  .fc-card,
+  .whatif-card,
+  .knowledge-card {
+    break-inside: avoid;
+  }
+}
